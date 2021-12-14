@@ -36,6 +36,7 @@ function App() {
   }, []);
 
   if (loading) {
+    //Un posible render.
     return (
       <main>
         <Loading />
@@ -44,6 +45,7 @@ function App() {
   }
 
   if (tours.length === 0) {
+    //Otro.
     return (
       <main>
         <div className="title">
@@ -57,6 +59,7 @@ function App() {
   }
 
   return (
+    //Y otro.
     <main>
       <Tours tours={tours} removeTour={removeTour} />
     </main>

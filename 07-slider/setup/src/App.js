@@ -6,6 +6,25 @@ function App() {
   const [people, setPeople] = useState(data);
   const [value, setValue] = useState(0);
 
+  useEffect(() => {
+    const lastIndex = people.length - 1;
+    if (value < 0) {
+      setValue(lastIndex);
+    }
+    if (value > lastIndex) {
+      setValue(0);
+    }
+  }, [value, people]);
+
+  useEffect(() => {
+    let slider = setInterval(() => {
+      setValue(value + 1);
+    }, 3000);
+    return () => {
+      clearInterval(slider);
+    };
+  }, [value]);
+
   return (
     <section className="section">
       <div className="title">

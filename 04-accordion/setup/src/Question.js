@@ -15,7 +15,10 @@ const Question = ({ title, info }) => {
           {showInfo ? <AiOutlineMinus /> : <AiOutlinePlus />}
         </button>
       </header>
-      {showInfo && <p>{info}</p>}
+      {/* {showInfo && <p>{info}</p>} Esta es la forma original como John lo hace. La de abajo sólo para ver cómo se puede usa el state para lograr lo mismo de diferentes formas.*/}
+      <p style={showInfo ? { display: "block" } : { display: "none" }}>
+        {info}
+      </p>
     </article>
   );
 };

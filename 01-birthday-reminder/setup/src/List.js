@@ -18,7 +18,7 @@ const List = () => {
   };
 
   //Create list.
-  const peopleList = data.map((person) => {
+  const peopleList = people.map((person) => {
     const { id, name, age, image } = person;
     return (
       <article key={id} className="person">

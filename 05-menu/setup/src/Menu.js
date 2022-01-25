@@ -1,5 +1,7 @@
 import React from "react";
 
+import { DateComponent } from "./Date";
+
 const Menu = ({ items }) => {
   return (
     <div className="section-center">

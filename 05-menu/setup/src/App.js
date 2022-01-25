@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
 
-const allCategories = ["all", ...new Set(items.map((item) => item.category))];
-
 function App() {
   const [menuItems, setMenuItems] = useState(items);
-  const [categories] = useState(allCategories);
+  // const [categories] = useState(allCategories);
+  //Como después del render inicial categories nunca cambia -y por tanto nunca, lo pasé a una referencia
+  // const categories = useRef(allCategories);
+  const allCategories = ["all", ...new Set(items.map((item) => item.category))];
 
   const filterItems = (category) => {
     if (category === "all") {
@@ -27,7 +28,7 @@ function App() {
           <h2>our menu</h2>
           <div className="underline"></div>
         </div>
-        <Categories categories={categories} filterItems={filterItems} />
+        <Categories categories={allCategories} filterItems={filterItems} />
         <Menu items={menuItems} />
       </section>
     </main>

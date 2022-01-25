@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaAngleDoubleRight } from "react-icons/fa";
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
 const url = "https://course-api.com/react-tabs-project";
 function App() {
   const [loading, setLoading] = useState(true);
-  const [jobs, setJobs] = useState([]);
+  // const [jobs, setJobs] = useState([]);
+  const jobsRef = useRef([]);
   const [value, setValue] = useState(0);
 
   const fetchJobs = async () => {
     try {
       const res = await fetch(url);
       const jobsData = await res.json();
-      setJobs(jobsData);
+      // setJobs(jobsData);
+      jobsRef.current = jobsData;
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -31,7 +33,8 @@ function App() {
     );
   }
 
-  const { company, dates, duties, title } = jobs[value];
+  // const { company, dates, duties, title } = jobs[value];
+  const { company, dates, duties, title } = jobsRef.current[value];
 
   return (
     <section className="section">
@@ -42,7 +45,7 @@ function App() {
       <div className="jobs-center">
         {/* btns */}
         <div className="btn-container">
-          {jobs.map((job, index) => {
+          {jobsRef.current.map((job, index) => {
             return (
               <button
                 key={job.id}

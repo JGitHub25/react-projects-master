@@ -10,7 +10,7 @@ const SingleColor = ({ rgb, weight, index }) => {
   useEffect(() => {
     const copied = setTimeout(() => {
       setAlert(false);
-    }, 3000);
+    }, 2000);
     return () => {
       clearInterval(copied);
     };

@@ -10,6 +10,11 @@ function App() {
   // const categories = useRef(allCategories);
   const allCategories = ["all", ...new Set(items.map((item) => item.category))];
 
+  const [todos, setTodos] = useState({
+    uno: "primer valor",
+    dos: "segundo valor",
+  });
+
   const filterItems = (category) => {
     if (category === "all") {
       setMenuItems(items);
@@ -20,12 +25,17 @@ function App() {
 
     setMenuItems(newItems);
   };
-
+  const handleClick = () => {
+    handleAdd("nuevo valor de uno");
+  };
+  const handleAdd = (todo) => {
+    setTodos({ ...todos, [todo.uno]: todo });
+  };
   return (
     <main>
       <section className="section menu">
         <div className="title">
-          <h2>our menu</h2>
+          <h2 onClick={handleClick}>our menu</h2>
           <div className="underline"></div>
         </div>
         <Categories categories={allCategories} filterItems={filterItems} />

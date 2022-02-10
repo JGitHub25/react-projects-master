@@ -5,6 +5,7 @@ import { useGlobalContext } from "./context";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useGlobalContext();
+
   return (
     <aside
       className={`${

@@ -24,12 +24,22 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
   };
 
+  const increaseQty = (id) => {
+    dispatch({ type: "INCREASE_QTY", payload: id });
+  };
+
+  const decreaseQty = (id) => {
+    dispatch({ type: "DECREASE_QTY", payload: id });
+  };
+
   return (
     <AppContext.Provider
       value={{
         ...state,
         clearCart,
         removeItem,
+        increaseQty,
+        decreaseQty,
       }}
     >
       {children}

@@ -7,6 +7,22 @@ export const reducer = (state, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
+    case "INCREASE_QTY":
+      let tempCart = state.cart.map((item) => {
+        return item.id === action.payload
+          ? { ...item, amount: item.amount + 1 }
+          : item;
+      });
+      return { ...state, cart: tempCart };
+    case "DECREASE_QTY":
+      let tempCart2 = state.cart
+        .map((item) => {
+          return item.id === action.payload
+            ? { ...item, amount: item.amount - 1 }
+            : item;
+        })
+        .filter((item) => item.amount !== 0);
+      return { ...state, cart: tempCart2 };
   }
   return state;
 };

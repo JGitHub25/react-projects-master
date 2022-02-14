@@ -7,13 +7,14 @@ export const reducer = (state, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
-    case "INCREASE_QTY":
+    case "INCREASE_QTY": {
       let tempCart = state.cart.map((item) => {
         return item.id === action.payload
           ? { ...item, amount: item.amount + 1 }
           : item;
       });
       return { ...state, cart: tempCart };
+    }
     case "DECREASE_QTY":
       let tempCart2 = state.cart
         .map((item) => {
@@ -23,6 +24,19 @@ export const reducer = (state, action) => {
         })
         .filter((item) => item.amount !== 0);
       return { ...state, cart: tempCart2 };
+    case "GET_TOTALS":
+      const { total, amount } = state.cart.reduce(
+        (cartTotal, cartItem) => {
+          const { price, amount } = cartItem;
+          const itemTotal = price * amount;
+
+          cartTotal.total += itemTotal;
+          cartTotal.amount += amount;
+          return cartTotal;
+        },
+        { total: 0, amount: 0 }
+      );
+      return { ...state, total: parseFloat(total.toFixed(2)), amount };
   }
   return state;
 };

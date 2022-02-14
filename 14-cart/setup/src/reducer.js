@@ -37,6 +37,10 @@ export const reducer = (state, action) => {
         { total: 0, amount: 0 }
       );
       return { ...state, total: parseFloat(total.toFixed(2)), amount };
+    case "LOADING":
+      return { ...state, loading: true };
+    case "DISPLAY_ITEMS":
+      return { ...state, cart: action.payload, loading: false };
   }
   return state;
 };

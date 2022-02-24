@@ -60,9 +60,7 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchStories(
-      `https://hn.algolia.com/api/v1/search?query=${state.query}&page=${state.page}`
-    );
+    fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
   }, [state.query, state.page]);
 
   return (

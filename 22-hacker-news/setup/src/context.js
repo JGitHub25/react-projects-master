@@ -24,6 +24,25 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const removeStory = (id) => {
+    dispatch({ type: REMOVE_STORY, payload: id });
+  };
+
+  const handleSearch = (query) => {
+    dispatch({ type: HANDLE_SEARCH, payload: query });
+  };
+
+  const handlePage = (newPage) => {
+    if (newPage > state.nbPages - 1) {
+      newPage = 0;
+    }
+    if (newPage < 0) {
+      newPage = state.nbPages - 1;
+    }
+
+    dispatch({ type: HANDLE_PAGE, payload: newPage });
+  };
+
   const fetchStories = async (url) => {
     dispatch({ type: SET_LOADING });
 
@@ -44,10 +63,14 @@ const AppProvider = ({ children }) => {
     fetchStories(
       `https://hn.algolia.com/api/v1/search?query=${state.query}&page=${state.page}`
     );
-  }, []);
+  }, [state.query, state.page]);
 
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider
+      value={{ ...state, removeStory, handleSearch, handlePage }}
+    >
+      {children}
+    </AppContext.Provider>
   );
 };
 // make sure use

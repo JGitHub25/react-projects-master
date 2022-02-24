@@ -17,6 +17,22 @@ const reducer = (state, action) => {
         hits: action.payload.hits,
         nbPages: action.payload.nbPages,
       };
+    case REMOVE_STORY:
+      return {
+        ...state,
+        hits: state.hits.filter((story) => story.objectID !== action.payload),
+      };
+    case HANDLE_SEARCH:
+      return {
+        ...state,
+        query: action.payload,
+        page: 0,
+      };
+    case HANDLE_PAGE:
+      return {
+        ...state,
+        page: action.payload,
+      };
     default:
       throw new Error(`no matching ${action.type} action type.`);
   }

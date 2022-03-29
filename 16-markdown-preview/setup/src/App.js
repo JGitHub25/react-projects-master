@@ -15,7 +15,6 @@ function App() {
           }}
         />
         <article className="result">
-          {" "}
           <ReactMarkdown>{markdown}</ReactMarkdown>
         </article>
       </section>

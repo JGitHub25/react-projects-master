@@ -13,7 +13,6 @@ function App() {
     } else if (target.classList.contains("prev-btn")) {
       newPage = page > 0 ? page - 1 : page;
     }
-    console.log(newPage);
     setPage(newPage);
   };
 
